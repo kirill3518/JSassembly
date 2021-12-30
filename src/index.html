@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datetime superapp</title>
-    <script src="./src/main.js" type="module"></script>
-    <script defer src="./src/timer.js"></script>
-    <script defer src="./node_modules/howler/dist/howler.js"></script>
 </head>
 
 <body>
+    <div id="switch_button">
+        <button>Таймер / Калькулятор дат</button>
+    </div>
     <form id="datecalc">
         <h3>Калькулятор дат</h3>
         <label>
@@ -25,7 +25,7 @@
         <button type="submit">Расчитать промежуток</button>
         <p id="datecalc__result"></p>
     </form>
-    <form id="timer">
+    <div id="timer">
         <h3>Таймер</h3>
         <label>
             <strong>Секунды:</strong>
@@ -37,7 +37,7 @@
         <label>
             <button id="stop">Стоп</button>
         </label>
-    </form>
+    </div>
 </body>
 
 </html>
