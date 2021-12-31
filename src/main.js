@@ -42,3 +42,11 @@ switchButtonEl.addEventListener("click", event => {
 onload = () => {
     switchEl();
 }
+
+// import { chunk } from 'lodash';
+
+// console.log(chunk(['a', 'b', 'c', 'd'], 2));
+
+import chunk from 'lodash/chunk';
+
+console.log(chunk(['a', 'b', 'c', 'd'], 2));
