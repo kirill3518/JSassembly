@@ -3,6 +3,8 @@
 
 const { resolve } = require('path'); // 1
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 1
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
     entry: './src/main.js',
@@ -21,12 +23,12 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             }, // 1
             {
                 test: /\.s[ac]ss$/i,          // 2
                 use: [
-                    'style-loader', // 3
+                    MiniCssExtractPlugin.loader, // 3
                     'css-loader',
                     'sass-loader'
                 ]
@@ -34,7 +36,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: resolve(__dirname, './src/index.html') })
+        new HtmlWebpackPlugin({ template: resolve(__dirname, './src/index.html') }),
+        new MiniCssExtractPlugin({ // 2
+            filename: '[name].[contenthash].css' // 3
+        }),
+        new BundleAnalyzerPlugin()
     ],
     devServer: {  // configuration for webpack-dev-server
         //contentBase: './src/public',  //source of static assets
