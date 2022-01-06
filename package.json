@@ -1,40 +1,27 @@
 {
+  "name": "lesson3",
+  "description": "Инструменты сборки Web-проектов",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "dev": "webpack --mode=development",
+    "build": "webpack --mode=production",
+    "serve": "webpack serve --mode=development --hot --open"
+  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.5.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "img-optimize-loader": "^1.0.7",
     "mini-css-extract-plugin": "^2.4.5",
-    "sass": "^1.45.1",
+    "sass": "^1.45.2",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.2"
-  },
-  "dependencies": {
-    "howler": "^2.2.3",
-    "lodash": "^4.17.21",
-    "lodash.chunk": "^4.2.0",
-    "luxon": "^2.2.0",
-    "webpack-bundle-analyzer": "^4.5.0"
-  },
-  "name": "jsassembly",
-  "description": "Инструменты сборки Web-проектов",
-  "version": "1.0.0",
-  "main": "webpack.config.js",
-  "scripts": {
-    "dev": "webpack --mode=development",
-    "build": "webpack --mode=production",
-    "serve": "webpack serve --mode=development"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kirill3518/JSassembly.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kirill3518/JSassembly/issues"
-  },
-  "homepage": "https://github.com/kirill3518/JSassembly#readme"
+  }
 }
