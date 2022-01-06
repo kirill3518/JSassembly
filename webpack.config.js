@@ -1,50 +1,70 @@
-// import "./styles/master.css";
-// import "./styles/master.sass";
-
-const { resolve } = require('path'); // 1
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // 1
+const { resolve, join } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
-    entry: './src/main.js',
+    entry: resolve(__dirname, 'src', 'index.js'),
+
     output: {
-        path: resolve(__dirname, 'build'), // 2
-        filename: 'main.[contenthash].js'  // 3
+        path: resolve(__dirname, 'dist'),
+        filename: 'main[contenthash].js'
     },
     module: {
         rules: [
             {
-                test: /\.(png|jpe?g|gif|mp3)$/i, // 1
-                use: 'file-loader',
-                // options: {
-                //     name: '[path][name].[ext]',
-                // },
-            },
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            }, // 1
-            {
-                test: /\.s[ac]ss$/i,          // 2
+                test: /\.s[ac]ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader, // 3
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     'sass-loader'
+                ]
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'img-optimize-loader',
+                        options: {
+                            compress: {
+                                mode: 'high',
+                                webp: true,
+                                gifsicle: true,
+                                disableOnDevelopment: false
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(mp[3|4])$/i,
+                use: [
+                    'file-loader'
                 ]
             }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({ template: resolve(__dirname, './src/index.html') }),
-        new MiniCssExtractPlugin({ // 2
-            filename: '[name].[contenthash].css' // 3
-        }),
-        new BundleAnalyzerPlugin()
-    ],
-    devServer: {  // configuration for webpack-dev-server
-        //contentBase: './src/public',  //source of static assets
-        port: 5000, // port to run dev-server
-    }
 
-};
+    devtool: false,
+
+    // devServer: {
+    //     static: './dist',
+    //     // hot: true
+    // },
+
+    devServer: {
+        static: {
+            directory: join(__dirname, 'src'),
+            directory: join(__dirname, 'media'),
+            //   publicPath: '/serve-public-path-url',
+        },
+    },
+
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: resolve(__dirname, 'src', 'index.html')
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css'
+        })
+    ]
+}
